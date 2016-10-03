@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>业务洞察系统</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <link rel="shortcut icon" href=" ../css/img/favicon.ico" />
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/interface.css">
+</head>
+<body>
+    <div class="header clearfix">
+        <div class="logo"></div>
+        <!--标题写这里-->
+        <h1>业务洞察系统</h1>
+    </div>
+    <div class="menu-wrapper">
+        
+    </div>
+    <div class="main-content">
+        <!--你们的内容写在这里-->
+        <div class="main-title">洞察库演示 / 文件批处理</div>
+        <div class="input-wp">
+            <label for="interface-url" class="url-input-label" style="">文件上传：</label>
+            <input type="file" id="upload-file-input" name="file" style="display:none">
+            
+            <button class="btn btn-default" id="file-upload">上传</button>
+        </div>
+        
+        <div class="tab-wp">
+            <ul id="myTab" class="nav nav-tabs">
+                <li class="active">
+                    <a href="#domain" data-toggle="tab">
+                        域名统计
+                    </a>
+                </li>
+                <li><a href="#type" data-toggle="tab">类型统计</a></li>
+            </ul>
+            <div id="myTabContent" class="tab-content">
+                <div class="tab-pane fade in active" id="domain">
+                    请上传文件
+                    
+                </div>
+                <div class="tab-pane fade" id="type">
+                    请上传文件
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/html" id="result-table-tmpl">
+    {{if list.length == 0}}
+        暂无数据
+    {{else}}
+        <div class="result-menu">
+            <a class="inline opt download" href="{{url}}">
+                <img src="../css/img/download.png">
+            </a>
+            <a class="inline opt data" href="javascript:void(0)">
+                <img src="../css/img/text.png">
+            </a>
+            <a class="inline opt virtual" href="javascript:void(0)">
+                <img src="../css/img/t.png">
+            </a>
+        </div>
+        <table class="table table-hover table-bordered">
+            <thead>
+            {{if type == 'type'}}
+                <tr>
+                    <td>序号</td>
+                    <td>类型（中文）</td>
+                    <td>类型（英文）</td>
+                    <td>数量</td>
+                </tr>
+            {{else if type == 'domain'}}
+                <tr>
+                    <td>序号</td>
+                    <td>域名（中文）</td>
+                    <td>域名（英文）</td>
+                    <td>数量</td>
+                </tr>
+            {{/if}}
+            </thead>
+            <tbody>
+                {{each list as item i}}
+                <tr>
+                    <td>{{i + 1}}</td>
+                    <td>{{item.ch}}</td>
+                    <td>{{item.en}}</td>
+                    <td>{{item.num}}</td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+        <div class="pager line">
+            <div class="pager-total grid">共计<em>{{total}}</em>个</div>
+            <div class="pager-jump-wp right">
+                <div class="grid pager-num">第<em>{{pagerNum}}</em>页</div>
+                <div class="grid pager-num">共<em>{{pagerTotal}}</em>页</div>
+                <div class="grid">
+                    <span>跳转到</span>
+                    <input type="text" class="pager-jump-input">
+                    <span>页</span>
+                    <button class="pager-jump-btn">确定</button>
+                </div>
+            </div>
+        </div>
+    {{/if}}
+    </script>
+    <!--放在最下面，如要更改位置，请保持基本顺序不变-->
+    <script src="../js/util/sea.js"></script>
+    <script>
+        seajs.config({
+            alias: {
+                "jquery": "../../../util/jquery.min.js",
+                "bootstrap": "../../../util/bootstrap.min.js"
+            }
+        });
+        //这里更改接口路径 及相应的get/post方法
+        seajs.use('../js/widget/page/file-batch/file-batch.js', function(file){
+            file.init({
+                uploadFile: {
+                    url: '../json/file-result.json',
+                    type: 'get'
+                },
+                pageType: {
+                    url: '../json/page-type.json',
+                    type: 'get'
+                },
+                pageDomain: {
+                    url: '../json/page-domain.json',
+                    type: 'get'
+                }
+            });
+        });
+    </script>
+</body>
+</html>

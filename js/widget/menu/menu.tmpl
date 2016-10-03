@@ -1,0 +1,27 @@
+
+<ul class="catalog">
+    <li class="catalog-li normal {{if type == 'index'}}active{{/if}}">
+        <span><i class="glyphicon glyphicon-folder-open"></i><a href="index.html">首页</a></span>
+    </li>
+
+    <li class="catalog-li" data-toggle="collapse"  data-target="#collapseOne">
+        <span><i class="glyphicon glyphicon-tasks"></i>洞察库演示</span>
+        <i class="absolute-down glyphicon glyphicon-chevron-down"></i>
+    </li>
+    <ul class="panel-collapse collapse  {{if type == 'file-batch' || type == 'interface'}}in{{/if}} collapse-ul" id="collapseOne">
+        <li class="collapse-li  {{if type == 'interface'}}active{{/if}}"><a href="interface.html">接口演示</a></li>
+        <li class="collapse-li  {{if type == 'file-batch'}}active{{/if}}"><a href="file-batch.html">文件批处理</a></li>
+    </ul>
+
+    <li class="catalog-li" data-toggle="collapse"  data-target="#collapseTwo">
+        <span><i class="glyphicon glyphicon-tasks"></i>规则管理</span>
+        <i class="absolute-down glyphicon glyphicon-chevron-down"></i>
+    </li>
+    <ul class="panel-collapse collapse  {{if type == 'domain-manage' || type == 'type-manage'}}in{{/if}} collapse-ul" id="collapseTwo">
+        <li class="collapse-li  {{if type == 'domain-manage'}}active{{/if}}"><a href="domain-manage.html">域名管理</a></li>
+        <li class="collapse-li  {{if type == 'type-manage'}}active{{/if}}"><a href="type-manage.html">类型管理</a></li>
+    </ul>
+    <li class="catalog-li normal  {{if type == 'developer'}}active{{/if}}">
+        <span><i class="glyphicon glyphicon-th-large"></i><a href="developer.html">开发者</a></span>
+    </li>
+</ul>

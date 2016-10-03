@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>业务洞察系统</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <link rel="shortcut icon" href=" ../css/img/favicon.ico" />
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/common.css">
+</head>
+<body>
+    <div class="header clearfix">
+        <div class="logo"></div>
+        <!--标题写这里-->
+        <h1>业务洞察系统</h1>
+    </div>
+    <div class="menu-wrapper">
+        
+    </div>
+    <div class="main-content">
+        <!--你们的内容写在这里-->
+        
+        
+    </div>
+    <!--放在最下面，如要更改位置，请保持基本顺序不变-->
+    <script src="../js/util/sea.js"></script>
+    <script>
+        seajs.config({
+            alias: {
+                "jquery": "../../util/jquery.min.js",
+                "bootstrap": "../../util/bootstrap.min.js"
+            }
+        });
+        //这里更改接口路径 及相应的get/post方法
+        seajs.use('../js/widget/index/index.js', function(){
+        });
+    </script>
+</body>
+</html>

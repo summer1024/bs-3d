@@ -1,0 +1,27 @@
+.input-wp label.grid{
+    margin-top: 5px;
+    width: 80px;
+    text-align: right;
+    margin-right: 10px;
+}
+.input-wp div.form-group{
+    width: 200px;
+}
+.add-div-wp{
+    width: 900px;
+    margin: 20px auto;
+    text-align: right;
+}
+.result-wp{
+    padding: 10px 20px;
+
+}
+.result-wp .no-result{
+    text-align: center;
+    margin-top: 100px;
+    color: grey;
+}
+.result-table{
+    min-height: 409px;
+    margin-bottom: 20px;
+}

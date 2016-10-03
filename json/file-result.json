@@ -1,0 +1,117 @@
+{
+    "errno": 0,
+    "data": {
+        "domain": {
+            "total": 143,
+            "url": "http://www.baidu.com",
+            "list": [
+                {
+                    "ch": "新浪",
+                    "en": "sina",
+                    "num": 34
+                },
+                {
+                    "ch": "网易",
+                    "en": "163",
+                    "num": 65
+                },
+                {
+                    "ch": "百度",
+                    "en": "baidu",
+                    "num": 12
+                },
+                {
+                    "ch": "谷歌",
+                    "en": "google",
+                    "num": 54
+                },
+                {
+                    "ch": "淘宝",
+                    "en": "taobao",
+                    "num": 122
+                },
+                {
+                    "ch": "京东",
+                    "en": "jd",
+                    "num": 1642
+                },
+                {
+                    "ch": "爱奇艺",
+                    "en": "iqiyi",
+                    "num": 345
+                },
+                {
+                    "ch": "搜狐",
+                    "en": "sohu",
+                    "num": 54
+                },
+                {
+                    "ch": "新华网",
+                    "en": "xinhua",
+                    "num": 65
+                },
+                {
+                    "ch": "哔哩哔哩",
+                    "en": "bilibili",
+                    "num": 532
+                }
+            ]
+        },
+        "type": {
+            "total": 438,
+            "url": "http://www.sina.com",
+            "list": [
+                {
+                    "ch": "体育",
+                    "en": "sports",
+                    "num": 53
+                },
+                {
+                    "ch": "新闻",
+                    "en": "news",
+                    "num": 64
+                },
+                {
+                    "ch": "娱乐",
+                    "en": "entertenment",
+                    "num": 52
+                },
+                {
+                    "ch": "汽车",
+                    "en": "auto",
+                    "num": 754
+                },
+                {
+                    "ch": "科技",
+                    "en": "tech",
+                    "num": 63
+                },
+                {
+                    "ch": "文化",
+                    "en": "culture",
+                    "num": 623
+                },
+                {
+                    "ch": "金融",
+                    "en": "finance",
+                    "num": 62
+                },
+                {
+                    "ch": "视频",
+                    "en": "video",
+                    "num": 624
+                },
+                {
+                    "ch": "房产",
+                    "en": "house",
+                    "num": 59
+                },
+                {
+                    "ch": "其他",
+                    "en": "other",
+                    "num": 67
+                }
+            ]
+        }
+    }
+}

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>业务洞察系统-接口演示</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <link rel="shortcut icon" href=" ../css/img/favicon.ico" />
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/interface.css">
+</head>
+<body>
+    <div class="header clearfix">
+        <div class="logo"></div>
+        <!--标题写这里-->
+        <h1>业务洞察系统</h1>
+    </div>
+    <div class="menu-wrapper">
+        
+    </div>
+    <div class="main-content">
+        <!--你们的内容写在这里-->
+        <div class="main-title">洞察库演示 / 接口演示</div>
+        <div class="input-wp">
+            <label for="interface-url" class="url-input-label" style="">输入</label>
+            <div class="form-group col-md-5">
+                <input type="text" name="interface-url" placeholder="请输入url" class="form-control" id="url-input">
+            </div>
+            <button class="btn btn-default url-submit">提交</button>
+        </div>
+        
+        <div class="tab-wp">
+            <ul id="myTab" class="nav nav-tabs">
+                <li class="active">
+                    <a href="#result" data-toggle="tab">
+                        可视化结果
+                    </a>
+                </li>
+                <li><a href="#json" data-toggle="tab">JSON数据</a></li>
+            </ul>
+            <div id="myTabContent" class="tab-content">
+                <div class="tab-pane fade in active" id="result">
+                    请输入相应URL进行查询
+                </div>
+                <div class="tab-pane fade" id="json">
+                    请输入相应URL进行查询
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--放在最下面，如要更改位置，请保持基本顺序不变-->
+    <script src="../js/util/sea.js"></script>
+    <script>
+        seajs.config({
+            alias: {
+                "jquery": "../../../util/jquery.min.js",
+                "bootstrap": "../../../util/bootstrap.min.js"
+            }
+        });
+        //这里更改接口路径 及相应的get/post方法
+        seajs.use('../js/widget/page/interface/interface.js', function(interface){
+            interface.init({
+                search: {
+                    url: '../json/searchInt.json',
+                    type: 'get'
+                }
+            });
+        });
+    </script>
+</body>
+</html>

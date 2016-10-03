@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>业务洞察系统</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <link rel="shortcut icon" href=" ../css/img/favicon.ico" />
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/rule.css">
+</head>
+<body>
+    <div class="header clearfix">
+        <div class="logo"></div>
+        <!--标题写这里-->
+        <h1>业务洞察系统</h1>
+    </div>
+    <div class="menu-wrapper">
+        
+    </div>
+    <div class="main-content">
+        <!--你们的内容写在这里-->
+        <div class="main-title">规则管理 / 类型管理</div>
+        <!--查询DIV-->
+        <div class="input-wp">
+            <div class="line inline">
+                <div class="line grid" style="width: 300px; margin-left: 20px">
+                    <label for="" class="grid">类型：</label>
+                    <div class="grid form-group">
+                        <input type="text" class="form-control" id="type">
+                    </div>
+                </div>
+                <div class="line grid" style="width: 300px; margin-left: 20px">
+                    <label for="" class="grid">名称：</label>
+                    <div class="grid form-group">
+                        <input type="text" class="form-control" id="type-name">
+                    </div>
+                </div>
+                <div class="line grid" style="width: 240px; margin-left: 20px;text-align:right">
+                    <label>
+                        <input type="checkbox" style="margin-right: 5px;" id="type-checkbox">是否只显示未知
+                    </label>
+                </div>
+            </div>
+            <div class="line inline">
+                <div class="line grid" style="width: 300px; margin-left: 20px">
+                    <label for="" class="grid">来源：</label>
+                    <div class="grid form-group">
+                        <input type="text" class="form-control" id="type-source">
+                    </div>
+                </div>
+                <div class="line grid" style="width: 300px; margin-left: 20px">
+                    <label for="" class="grid">访问数量：</label>
+                    <div class="grid form-group">
+                        <input type="text" class="form-control" id="type-num">
+                    </div>
+                </div>
+                <div class="line grid" style="width: 240px; margin-left: 20px;text-align:right">
+                    <button class="btn btn-default search-type-btn">查询</button>
+
+                </div>
+            </div>
+        </div>
+        <!--查询DIV end-->
+        <!--添加 start-->
+        <div class="add-div-wp">
+            <button class="btn btn-default add-type-btn">添加类型</button>
+        </div>
+        <!--添加 end-->
+        <!--表格 start-->
+        <div class="result-wp">
+            <div class="no-result">
+                当前暂无查询结果
+            </div>
+            
+        </div>
+        <!--表格 end-->
+    </div>
+    <script type="text/html" id="pop-dialog">
+        {{if type == 'add'}}
+            <div class="dialog-wp">
+                <div class="" style="width: 300px; margin: 0 auto">
+                    <label for="" class="inline">类型：</label>
+                    <div class="inline form-group">
+                        <input type="text" class="form-control" id="pop-type">
+                    </div>
+                </div>
+                <div class="" style="width: 300px; margin: 0 auto">
+                    <label for="" class="inline">名称：</label>
+                    <div class="inline form-group">
+                        <input type="text" class="form-control" id="pop-name">
+                    </div>
+                </div>
+                <div class="" style="width: 300px; margin: 0 auto">
+                    <label for="" class="inline">来源：</label>
+                    <div class="inline form-group">
+                        <input type="text" class="form-control" id="pop-source">
+                    </div>
+                </div>
+            </div>
+        {{else if type == 'mdf'}}
+            <div class="dialog-wp">
+                <div class="" style="width: 300px; margin: 0 auto">
+                    <label for="" class="inline">域名：</label>
+                    <div class="inline form-group">
+                        <input type="text" class="form-control" id="pop-type" value="{{data.type}}">
+                    </div>
+                </div>
+                <div class="" style="width: 300px; margin: 0 auto">
+                    <label for="" class="inline">名称：</label>
+                    <div class="inline form-group">
+                        <input type="text" class="form-control" id="pop-name" value="{{data.name}}">
+                    </div>
+                </div>
+                <div class="" style="width: 300px; margin: 0 auto">
+                    <label for="" class="inline">类型：</label>
+                    <div class="inline form-group">
+                        <input type="text" class="form-control" id="pop-source" value="{{data.source}}">
+                    </div>
+                </div>
+            </div>
+        {{/if}}
+        
+    </script>
+    <script type="text/html" id="type-result-table">
+        {{if list.length === 0}}
+            <div class="no-result">
+                暂无查询结果
+            </div>
+        {{else}}
+            <div class="result-table">
+                <table class="table table-hover table-bordered">
+                    <thead>
+                        <tr>
+                            <td>ID</td>
+                            <td>类型</td>
+                            <td>名称</td>
+                            <td>来源</td>
+                            <td>访问数量</td>
+                            <td>操作</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{each list as item i}}
+                        <tr data-id="{{item.id}}">
+                            <td>{{i + 1}}</td>
+                            <td>{{item.domain}}</td>
+                            <td>{{item.name}}</td>
+                            <td>{{item.type}}</td>
+                            <td>{{item.num}}</td>
+                            <td>
+                                <a href="javascript:void(0)" class="opt mdf">修改</a>
+                                <a href="javascript:void(0)" class="opt del">删除</a>
+                            </td>
+                        </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+            </div>
+        
+        
+            <div class="pager line">
+                <div class="pager-total grid">共计<em>{{total}}</em>个</div>
+                <div class="pager-jump-wp right">
+                    <div class="grid pager-num">第<em>{{pagerNum}}</em>页</div>
+                    <div class="grid pager-num">共<em>{{pagerTotal}}</em>页</div>
+                    <div class="grid">
+                        <span>跳转到</span>
+                        <input type="text" class="pager-jump-input">
+                        <span>页</span>
+                        <button class="pager-jump-btn">确定</button>
+                    </div>
+                </div>
+            </div>
+        {{/if}}
+    </script>
+
+    <!--放在最下面，如要更改位置，请保持基本顺序不变-->
+    <script src="../js/util/sea.js"></script>
+    <script>
+        seajs.config({
+            alias: {
+                "jquery": "../../../util/jquery.min.js",
+                "bootstrap": "../../../util/bootstrap.min.js"
+            }
+        });
+        //这里更改接口路径 及相应的get/post方法
+        seajs.use('../js/widget/page/type-manage/type-manage.js', function(type){
+            type.init({
+                addType: {
+                    url: '../json/result.json',
+                    type: 'get'
+                },
+                delType: {
+                    url: '../json/result.json',
+                    type: 'get'
+                },
+                mdfType: {
+                    url: '../json/result.json',
+                    type: 'get'
+                },
+                searchType: {
+                    url: '../json/domain.json',
+                    type: 'get'
+                }
+            });
+        });
+    </script>
+</body>
+</html>
