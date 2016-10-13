@@ -2,6 +2,7 @@ define(function(require, exports, module){
     var $ = require('jquery');
     require('bootstrap');
     var bt = require('../../../util/template.js');
+    var urlrouter = require('../../url/url.js');
     require('../../dialog/dialog.js');
     var menu = require('../../menu/menu.js');
     var popup = require('../../../popup.js');
@@ -21,13 +22,14 @@ define(function(require, exports, module){
                 }
 
                 $.ajax({
-                    url: opt.search.url,
-                    type: opt.search.type,
+                    url: urlrouter.search.url,
+                    type: urlrouter.search.type,
                     data: param
                 }).done(function(res){
+                    res = JSON.parse(res);
                     if(res.errno == 0){
                         // json数据展示
-                        $('#json').html('<pre>'+syntaxHighlight(res)+'</pre>');
+                        $('#json').html('<pre>'+syntaxHighlight(res.data)+'</pre>');
                         // 可视化展示 略
                         
                     }else{

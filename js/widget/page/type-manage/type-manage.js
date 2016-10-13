@@ -2,6 +2,7 @@ define(function(require, exports, module){
     var $ = require('jquery');
     require('bootstrap');
     var bt = require('../../..//util/template.js');
+    var urlrouter = require('../../url/url.js');
     require('../../dialog/dialog.js');
     var menu = require('../../menu/menu.js');
     var popup = require('../../../popup.js');
@@ -12,29 +13,29 @@ define(function(require, exports, module){
         init: function(opt){
             var me = this;
             
-            me.rn = 10;
+            me.pageSize = 10;
             me.param = {};
-            me.opt = opt;
+            me.opt = urlrouter;
             me.bindEvents(opt);
             // 初始化加载所有表格，需要与后端对一下
             $('.search-type-btn').click();
         },
         jump: function(num){
             var me = this;
-            me.param.pn = (num - 1) * me.rn;
+            me.param.page = num;
 
             $.ajax({
                 url: me.opt.searchType.url,
                 type: me.opt.searchType.type,
                 data: me.param
             }).done(function(res){
-
+                res = JSON.parse(res);
                 if(res.errno == 0){
                     var data = {};
                     data.total = res.data.total;
                     data.list = res.data.list;
-                    data.pagerTotal = Math.ceil(data.total / me.rn);
-                    data.pagerNum = 1;
+                    data.pagerTotal = Math.ceil(data.total / me.pageSize);
+                    data.pagerNum = me.param.page;
 
 
                     $('.result-wp').html(bt("type-result-table", data));
@@ -64,16 +65,20 @@ define(function(require, exports, module){
                     width: 500,
                     title: '添加域名',
                     callback: function(){
+                        var domain = $.trim($('#pop-type').val());
+                        var name = $.trim($('#pop-name').val());
+                        var type = $.trim($('#pop-source').val());
                         var param = {
-                            type: $.trim($('#pop-type').val()),
-                            name: $.trim($('#pop-name').val()),
-                            source: $.trim($('#pop-source').val())
+                            domain: encodeURIComponent(domain),
+                            name: encodeURIComponent(name),
+                            type: encodeURIComponent(type)
                         };
                         $.ajax({
-                            url: opt.addType.url,
-                            type: opt.addType.type,
+                            url: urlrouter.addType.url,
+                            type: urlrouter.addType.type,
                             data: param
                         }).done(function(res){
+                            res = JSON.parse(res);
                             if(res.errno == 0){
                                 popup('添加成功！');
                             }else{
@@ -89,34 +94,41 @@ define(function(require, exports, module){
              * ajaxUrl: opt.searchType.url / type
              */
             $('.search-type-btn').on('click', function(){
-                var type = $.trim($('#type').val());
+                var domain = $.trim($('#type').val());
                 var name = $.trim($('#type-name').val());
-                var source = $.trim($('#type-source').val());
+                var type = $.trim($('#type-source').val());
                 var num = $.trim($('#type-num').val());
                 var isShowNo = $('#type-checkbox').get(0).checked;
 
                 // 传入的参数
-                var param = {
-                    type: type,
-                    name: name,
-                    source: source,
-                    num: num,
-                    isShowNo: isShowNo
+                var param = {};
+                if(domain != ''){
+                    param.domain = encodeURIComponent(domain);
                 }
+                if(name != ''){
+                    param.name = encodeURIComponent(name);
+                }
+                if(type != ''){
+                    param.type = encodeURIComponent(type);
+                }
+                if(num != ''){
+                    param.num = num;
+                }
+                param.isShowNo = isShowNo;
                 me.param = param;
-                me.param.pn = 0;
-                me.param.rn = me.rn;
+                me.param.page = 1;
+                me.param.pageSize = me.pageSize;
                 $.ajax({
-                    url: opt.searchType.url,
-                    type: opt.searchType.type,
+                    url: urlrouter.searchType.url,
+                    type: urlrouter.searchType.type,
                     data: param
                 }).done(function(res){
-
+                    res = JSON.parse(res);
                     if(res.errno == 0){
                         var data = {};
                         data.total = res.data.total;
                         data.list = res.data.list;
-                        data.pagerTotal = Math.ceil(data.total / me.rn);
+                        data.pagerTotal = Math.ceil(data.total / me.pageSize);
                         data.pagerNum = 1;
 
 
@@ -160,21 +172,25 @@ define(function(require, exports, module){
                         width: 400,
                         title: '修改域名',
                         callback: function(){
+                            var domain = $.trim($('#pop-type').val());
+                            var name = $.trim($('#pop-name').val());
+                            var type = $.trim($('#pop-source').val());
                             var param = {
                                 id: id,
-                                type: $.trim($('#pop-type').val()),
-                                name: $.trim($('#pop-name').val()),
-                                source: $.trim($('#pop-source').val())
+                                domain: encodeURIComponent(domain),
+                                name: encodeURIComponent(name),
+                                type: encodeURIComponent(type)
                             };
                             $.ajax({
-                                url: opt.mdfType.url,
-                                type: opt.mdfType.type,
+                                url: urlrouter.mdfType.url,
+                                type: urlrouter.mdfType.type,
                                 data: param
                             }).done(function(res){
+                                res = JSON.parse(res);
                                 if(res.errno == 0){
-                                    $tr.find('td').eq(1).html(param.type);
-                                    $tr.find('td').eq(2).html(param.name);
-                                    $tr.find('td').eq(3).html(param.source);
+                                    $tr.find('td').eq(1).html(domain);
+                                    $tr.find('td').eq(2).html(name);
+                                    $tr.find('td').eq(3).html(type);
                                     popup('修改成功！');
                                 }else{
                                     popup('修改失败！');
@@ -192,10 +208,11 @@ define(function(require, exports, module){
                         id: id
                     };
                     $.ajax({
-                        url: opt.delType.url,
-                        type: opt.delType.type,
+                        url: urlrouter.delType.url,
+                        type: urlrouter.delType.type,
                         data: param
                     }).done(function(res){
+                        res = JSON.parse(res);
                         if(res.errno == 0){
                             $tr.remove();
                             popup('删除成功！');
